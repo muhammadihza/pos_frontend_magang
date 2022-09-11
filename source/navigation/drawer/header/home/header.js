@@ -9,7 +9,7 @@ const Screen = Dimensions.get('window')
 const Header = ({navigation}) => {
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} style={{ marginLeft: 18 }}>
+            <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} style={styles.menu}>
                 <Icon name='bars' size={17} color={'#FFFFFF'} />
             </TouchableOpacity>
 
@@ -22,11 +22,9 @@ const Header = ({navigation}) => {
 
                 <Text style={styles.text1}>Selamat Datang !</Text>
             </View>
-            <TouchableOpacity style={{marginLeft: 80, marginRight: 25}}>
+            <TouchableOpacity onPress={() => {navigation.navigate('AddProduct')} } style={{marginLeft: Screen.width * 0.27, marginRight: Screen.width * 0.05}}>
                 <Icon2 name='store' color={'#FFFFFF'} size={20} />
             </TouchableOpacity>
-
-
 
         </View>
     )
@@ -39,7 +37,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#284A9F',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center'
+    },
+
+    menu: {
+        width: Screen.width * 0.09,
+        height: Screen.height * 0.05,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginLeft: Screen.width * 0.01
     },
 
     text1: {
@@ -51,7 +56,7 @@ const styles = StyleSheet.create({
 
     mid: {
         flexDirection: 'column',
-        marginLeft: 100,
+        marginLeft: Screen.width * 0.27,
         alignItems: 'center',
         justifyContent: 'center',
         marginBottom: 5

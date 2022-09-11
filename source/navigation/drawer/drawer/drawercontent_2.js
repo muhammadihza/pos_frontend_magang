@@ -7,7 +7,7 @@ import Icon4 from 'react-native-vector-icons/Octicons'
 
 const Screen = Dimensions.get('window')
 
-export default function DrawerContent(props) {
+export default function DrawerContent_2(props) {
     return (
         <View>
 
@@ -16,7 +16,7 @@ export default function DrawerContent(props) {
                 <Text style={styles.text1}>Menu</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => { props.navigation.navigate('Riwayat') }} style={[styles.item, { marginTop: 10 }]}>
+            <TouchableOpacity onPress={() => { props.navigation.navigate('ListRiwayat') }} style={[styles.item, { marginTop: 10 }]}>
                 <View style={{ marginLeft: 5, marginTop: 5 }}>
                     <Icon4 name='checklist' size={30} color={'#FFFFFF'} />
                 </View>

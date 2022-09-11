@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Text, View, StyleSheet, Dimensions, TouchableOpacity, TextInput, Image } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Icon2 from 'react-native-vector-icons/FontAwesome5'
+import { AuthContext } from '../../context/AuthContext';
 
 const Screen = Dimensions.get('window')
 
 const HalamanLogin = ({ navigation }) => {
 
+    const [username, setUsername] = useState(null);
+    const [password, setPassword] = useState(null);
     const [passwordVisible, setPasswordVisible] = useState(true);
+    const val = useContext(AuthContext);
 
     return (
         <View style={styles.screen1}>
@@ -30,6 +34,8 @@ const HalamanLogin = ({ navigation }) => {
                             style={[styles.inputview, styles.inputtext, { marginTop: 27 }]}
                             placeholder='Masukkan username'
                             placeholderTextColor={'#C3C3C3'}
+                            value={username}
+                            onChangeText={text => setUsername(text)}
                         />
 
                         <View style={{ position: 'absolute', top: 40, left: 10, right: 0, bottom: 0 }}>
@@ -44,21 +50,6 @@ const HalamanLogin = ({ navigation }) => {
 
 
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                        <TextInput
-                            style={[styles.inputview, styles.inputtext, { marginTop: 27 }]}
-                            placeholder='Masukkan password'
-                            placeholderTextColor={'#C3C3C3'}
-                            secureTextEntry={passwordVisible}
-                            position={'relative'}
-                        />
-
-                        {/* <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)} style={styles.eye}>
-                            <Icon
-                                name={passwordVisible ? "eye-slash" : "eye"}
-                                color={"#284A9F"}
-                                size={15}
-                            />
-                        </TouchableOpacity> */}
 
                         <View style={{ position: 'absolute', top: 40, left: 10, right: 0, bottom: 0 }}>
                             <Icon2
@@ -68,17 +59,28 @@ const HalamanLogin = ({ navigation }) => {
                             />
                         </View>
 
+                        <TextInput
+                            style={[styles.inputview, styles.inputtext, { marginTop: 27 }]}
+                            placeholder='Masukkan password'
+                            placeholderTextColor={'#C3C3C3'}
+                            secureTextEntry={passwordVisible}
+                            position={'relative'}
+                            value={password}
+                            onChangeText={text => setPassword(text)}
+                        />
+
+                        <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)} style={styles.eye}>
+                            <Icon
+                                name={passwordVisible ? "eye-slash" : "eye"}
+                                color={"#284A9F"}
+                                size={15}
+                            />
+                        </TouchableOpacity>
+
                     </View>
 
-                    <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)} style={styles.eye}>
-                        <Icon
-                            name={passwordVisible ? "eye-slash" : "eye"}
-                            color={"#284A9F"}
-                            size={15}
-                        />
-                    </TouchableOpacity>
 
-                    <TouchableOpacity style={{ marginLeft: 180, marginTop: 9 }}>
+                    <TouchableOpacity style={{ marginLeft: Screen.width * 0.48, marginTop: 9 }}>
                         <Text style={styles.textLupa}>Lupa password ?</Text>
                     </TouchableOpacity>
 
@@ -134,7 +136,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 20,
         position: 'relative',
-        marginTop: 17
+        marginTop: Screen.height * 0.025
     },
 
     text1: {
@@ -155,10 +157,13 @@ const styles = StyleSheet.create({
 
     eye: {
         position: 'absolute',
-        top: 195, left: 250, right: 0, bottom: 0,
+        top: Screen.height * 0.055, 
+        left: Screen.width * 0.64,
+        right: 0, bottom: 0,
         width: Screen.width * 0.04,
         height: Screen.height * 0.025,
-        backgroundColor: '#FFFFFF'
+        backgroundColor: '#FFFFFF',
+        zIndex: 99
     },
 
     textLupa: {
